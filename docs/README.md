@@ -6,7 +6,7 @@
     class="center"
     width=500px
   ><br>
-  A <b>Hackintosh</b> project implementing the <a href="https://github.com/acidanthera/MacHyperVSupport">MacHyperVSupport</a> package for <b>Windows Hyper-V</b>, built on top of the <a href="https://github.com/acidanthera/OpenCorePkg">OpenCore</a> bootloader and <a href="https://github.com/Qonfused/OCE-Build">OCE-Build</a> build manager.
+  Проект <b>Hackintosh</b>, реализующий пакет <a href="https://github.com/acidanthera/MacHyperVSupport">MacHyperVSupport</a> для <b>Windows Hyper-V</b>, построенный поверх загрузчика <a href="https://github.com/acidanthera/OpenCorePkg">OpenCore</a> и менеджера сборки <a href="https://github.com/Qonfused/OCE-Build">OCE-Build</a>.
 </p>
 
 <div align="center">
@@ -19,411 +19,410 @@
 
 </div>
 
-## ⚡Quick Links
+## ⚡Быстрые ссылки
 
-- [Current Progress](#%EF%B8%8F-current-progress)
-  - [macOS Version Support](#macos-version-support)
-- [Getting Started](#-getting-started)
-  - [1. Clone this repository using git](#1-clone-this-repository-using-git)
-  - [2. Configure OpenCore for your hardware](#2-configure-opencore-for-your-hardware)
-    - [Intel](#intel)
-    - [AMD](#amd)
-  - [3. Build this repository using OCE-Build](#3-build-this-repository-using-oce-build)
-  - [4. Setting up Hyper-V](#4-setting-up-hyper-v)
-  - [5. Using this EFI with macOS](#5-using-this-efi-with-macos)
-  - [6. Troubleshooting](#6-troubleshooting)
-- [Contributing](#-contributing)
-- [License](#%EF%B8%8F-license)
-- [Credits](#-credits)
+- [Текущий прогресс](#%EF%B8%8F-current-progress)
+ - [Поддержка версий macOS](#macos-version-support)
+- [Как начать](#-getting-started)
+ - [1. Клонировать репозиторий через git](#1-clone-this-repository-using-git)
+ - [2. Настроить OpenCore для вашего железа](#2-configure-opencore-for-your-hardware)
+ - [Intel](#intel)
+ - [AMD](#amd)
+ - [3. Построить этот репозиторий с помощью OCE-Build](#3-build-this-repository-using-oce-build)
+ - [4. Настройка Hyper-V](#4-setting-up-hyper-v)
+ - [5. Использование этого EFI с macOS](#5-using-this-efi-with-macos)
+ - [6. Устранение неполадок](#6-troubleshooting)
+- [Как внести вклад](#-contributing)
+- [Лицензия](#%EF%B8%8F-license)
+- [Благодарности](#-credits)
 
-## ⚙️ Current Progress
+## ⚙️ Текущий прогресс
 
-Refer to the [CHANGELOG](/docs/CHANGELOG.md) or [SemVer board](#) for changes implemented per release version.
+Смотрите [CHANGELOG](/docs/CHANGELOG.md) или доску SemVer для изменений, реализованных в каждой версии.
 
-### macOS Version Support:
+### Поддержка версий macOS:
 
 > [!NOTE]
-> Installations of OS X Tiger (10.4) to Snow Leopard (10.6) are not possible directly. It is recommended to first install a newer version of macOS and restore to the desired version using a [disk image provided by Acidanthera](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/mac-install-dmg.html).
+> Установки OS X Tiger (10.4) до Snow Leopard (10.6) напрямую невозможны. Рекомендуется сначала установить более новую версию macOS и затем восстановиться до желаемой версии с использованием [образа диска, предоставленного Acidanthera](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/mac-install-dmg.html).
 >
-> You can also find other past InstallAssistant.dmg archives on [Archive.org](https://archive.org/details/@khronokernel).
+> Также можно найти архивы InstallAssistant.dmg на [Archive.org](https://archive.org/details/@khronokernel).
 
-Supported versions below include macOS versions **10.4** to **26.0**.
+Поддерживаемые версии перечислены ниже — от **10.4** до **26.0**.
 
 <table>
-  <thead>
-    <tr>
-      <th>macOS Version</th>
-      <th colspan=2>Status</th>
-      <th>Minimum version</th>
-      <th>Maximum version</th>
-    </tr>
-  </thead>
-  <tbody>
-  <!-- macOS 26 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/_placeholder.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Tahoe
-      </td>
-      <td style="text-align: center;">🚧</td>
-      <td>In Progress.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://www.apple.com/macos/macos-tahoe-preview/"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 15 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sequoia.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Sequoia
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://www.apple.com/macos/macos-sequoia/"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 14 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sonoma.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Sonoma
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://apps.apple.com/us/app/macos-sonoma/id6450717509"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 13 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/ventura.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Ventura
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://apps.apple.com/us/app/macos-ventura/id1638787999"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 12 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/monterey.png"
-          width=22
-          hspace=2
-          align="top"
-        />
-        Monterey
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://apps.apple.com/us/app/macos-monterey/id1576738294"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 11 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/big-sur.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Big Sur
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://apps.apple.com/us/app/macos-big-sur/id1526878132"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.15 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/catalina.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Catalina
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://apps.apple.com/us/app/macos-catalina/id1466841314"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.14 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mojave.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Mojave
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://apps.apple.com/us/app/macos-mojave/id1398502828"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.13 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/high-sierra.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        High Sierra
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://apps.apple.com/us/app/macos-high-sierra/id1246284741"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.12 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sierra.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Sierra
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="http://updates-http.cdn-apple.com/2019/cert/061-39476-20191023-48f365f4-0015-4c41-9f44-39d3d2aca067/InstallOS.dmg"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.11 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/el-capitan.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        El Capitan
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="http://updates-http.cdn-apple.com/2019/cert/061-41424-20191024-218af9ec-cf50-4516-9011-228c78eda3d2/InstallMacOSX.dmg"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.10 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/yosemite.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Yosemite
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="http://updates-http.cdn-apple.com/2019/cert/061-41343-20191023-02465f92-3ab5-4c92-bfe2-b725447a070d/InstallMacOSX.dmg"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.9 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mavericks.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Mavericks
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://archive.org/details/os-x-mavericks-10.9.5"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.8 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mountain-lion.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Mountain Lion
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://updates.cdn-apple.com/2021/macos/031-0627-20210614-90D11F33-1A65-42DD-BBEA-E1D9F43A6B3F/InstallMacOSX.dmg"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.7 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/lion.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Lion
-      </td>
-      <td style="text-align: center;">✅</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><a href="https://updates.cdn-apple.com/2021/macos/041-7683-20210614-E610947E-C7CE-46EB-8860-D26D71F0D3EA/InstallMacOSX.dmg"><code>(Latest)</code></a></td>
-    </tr>
-  <!-- macOS 10.6 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/snow-leopard.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Snow Leopard
-      </td>
-      <td style="text-align: center;">🚧</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><code>(Retail)</code></td>
-    </tr>
-  <!-- macOS 10.5 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/leopard.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Leopard
-      </td>
-      <td style="text-align: center;">🚧</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><code>(Retail)</code></td>
-    </tr>
-  <!-- macOS 10.4 -->
-    <tr>
-      <td>
-        <img
-          src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/tiger.png"
-          width=25
-          hspace=2
-          align="top"
-        />
-        Tiger
-      </td>
-      <td style="text-align: center;">🚧</td>
-      <td>Supported.</td>
-      <td><code>(None)</code></td>
-      <td><code>(Retail)</code></td>
-    </tr>
-  </tbody>
+ <thead>
+ <tr>
+ <th>Версия macOS</th>
+ <th colspan=2>Статус</th>
+ <th>Минимальная версия</th>
+ <th>Максимальная версия</th>
+ </tr>
+ </thead>
+ <tbody>
+ <!-- macOS26 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/_placeholder.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Tahoe
+ </td>
+ <td style="text-align: center;">🚧</td>
+ <td>В работе.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://www.apple.com/macos/macos-tahoe-preview/"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS15 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sequoia.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Sequoia
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://www.apple.com/macos/macos-sequoia/"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS14 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sonoma.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Sonoma
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://apps.apple.com/us/app/macos-sonoma/id6450717509"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS13 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/ventura.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Ventura
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://apps.apple.com/us/app/macos-ventura/id1638787999"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS12 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/monterey.png"
+ width=22
+ hspace=2
+ align="top"
+ />
+ Monterey
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://apps.apple.com/us/app/macos-monterey/id1576738294"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS11 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/big-sur.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Big Sur
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://apps.apple.com/us/app/macos-big-sur/id1526878132"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.15 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/catalina.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Catalina
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://apps.apple.com/us/app/macos-catalina/id1466841314"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.14 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mojave.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Mojave
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://apps.apple.com/us/app/macos-mojave/id1398502828"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.13 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/high-sierra.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ High Sierra
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://apps.apple.com/us/app/macos-high-sierra/id1246284741"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.12 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sierra.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Sierra
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="http://updates-http.cdn-apple.com/2019/cert/061-39476-20191023-48f365f4-0015-4c41-9f44-39d3d2aca067/InstallOS.dmg"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.11 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/el-capitan.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ El Capitan
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="http://updates-http.cdn-apple.com/2019/cert/061-41424-20191024-218af9ec-cf50-4516-9011-228c78eda3d2/InstallMacOSX.dmg"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.10 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/yosemite.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Yosemite
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="http://updates-http.cdn-apple.com/2019/cert/061-41343-20191023-02465f92-3ab5-4c92-bfe2-b725447a070d/InstallMacOSX.dmg"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.9 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mavericks.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Mavericks
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://archive.org/details/os-x-mavericks-10.9.5"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.8 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mountain-lion.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Mountain Lion
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://updates.cdn-apple.com/2021/macos/031-0627-20210614-90D11F33-1A65-42DD-BBEA-E1D9F43A6B3F/InstallMacOSX.dmg"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.7 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/lion.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Lion
+ </td>
+ <td style="text-align: center;">✅</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><a href="https://updates.cdn-apple.com/2021/macos/041-7683-20210614-E610947E-C7CE-46EB-8860-D26D71F0D3EA/InstallMacOSX.dmg"><code>(Последняя)</code></a></td>
+ </tr>
+ <!-- macOS10.6 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/snow-leopard.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Snow Leopard
+ </td>
+ <td style="text-align: center;">🚧</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><code>(Retail)</code></td>
+ </tr>
+ <!-- macOS10.5 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/leopard.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Leopard
+ </td>
+ <td style="text-align: center;">🚧</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><code>(Retail)</code></td>
+ </tr>
+ <!-- macOS10.4 -->
+ <tr>
+ <td>
+ <img
+ src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/tiger.png"
+ width=25
+ hspace=2
+ align="top"
+ />
+ Tiger
+ </td>
+ <td style="text-align: center;">🚧</td>
+ <td>Поддерживается.</td>
+ <td><code>(Нет)</code></td>
+ <td><code>(Retail)</code></td>
+ </tr>
+ </tbody>
 </table>
 
-Refer to [HyperV-versions.md](https://github.com/acidanthera/MacHyperVSupport/blob/master/Docs/HyperV-versions.md) for a complete breakdown of macOS compatibility with Windows Client, Server, and Hyper-V versions.
+См. [HyperV-versions.md](https://github.com/acidanthera/MacHyperVSupport/blob/master/Docs/HyperV-versions.md) для полного описания совместимости macOS с версиями Windows Client, Server и Hyper-V.
 
-## ✨ Getting Started
+## ✨ Как начать
 
-If you opt to use one of the pre-built releases from this repository, you can skip to [2. Configure OpenCore for your hardware](#2-configure-opencore-for-your-hardware) to setup OpenCore for your specific CPU, and then proceed to [4. Setting up Hyper-V](#4-setting-up-hyper-v) to create a new virtual machine.
+Если вы используете один из предварительно собранных релизов из этого репозитория, вы можете перейти сразу к разделу [2. Настройка OpenCore для вашего железа](#2-configure-opencore-for-your-hardware), чтобы настроить OpenCore под ваш CPU, а затем перейти к [4. Настройка Hyper-V](#4-setting-up-hyper-v) для создания новой виртуальной машины.
 
-Those who wish to build this project from source can follow the below steps to clone this repository, build the EFI, and setup Hyper-V.
+Те, кто желает собрать проект из исходников, могут следовать шагам ниже для клонирования репозитория, сборки EFI и настройки Hyper-V.
 
-### 1. Clone this repository using Git
+### 1. Клонирование репозитория через Git
 
-To clone this repository, run the below command:
+Чтобы клонировать репозиторий, выполните:
 ```sh
 git clone https://github.com/Qonfused/OSX-Hyper-V
 cd OSX-Hyper-V
 ```
 
 > [!TIP]
-> Alternatively, you can use the curl command to download and extract the tarball from GitHub:
+> В качестве альтернативы можно использовать команду curl для загрузки и распаковки архива с GitHub:
 > ```pwsh
 > iwr https://github.com/Qonfused/OSX-Hyper-V/archive/refs/heads/main.zip -OutFile OSX-Hyper-V-main.zip | tar -xf OSX-Hyper-V-main.zip
 > rm OSX-Hyper-V-main.zip
 > cd OSX-Hyper-V-main
 > ```
 
-### 2. Configure OpenCore for your hardware
+### 2. Настроить OpenCore для вашего железа
 
 > [!NOTE]
-> **MacHyperVSupport** requires Windows Server 2012 R2 / Windows 8.1 or higher. Windows Server 2016 is currently unsupported.
+> **MacHyperVSupport** требует Windows Server2012 R2 / Windows8.1 или новее. Windows Server2016 в настоящее время не поддерживается.
 
-As Hyper-V is a type-1 hypervisor, it requires a compatible CPU to run macOS. This means that any passed-through hardware needs to be supported or patched as you would on a bare-metal Hackintosh.
+Поскольку Hyper-V — гипервизор типа1, он требует совместимый CPU для запуска macOS. Это означает, что любое передаваемое оборудование должно быть поддержано или пропатчено так же, как на обычном Hackintosh.
 
-There is no GPU acceleration by default, which means any graphics-related tasks will be driven by the CPU and will be slow. To get GPU acceleration, you will need to use Discrete Device Assignment (DDA) to pass through a supported GPU for acceleration.
+По умолчанию нет аппаратного ускорения GPU, поэтому все графические задачи будут выполняться CPU и будут медленными. Для получения аппаратного ускорения нужно использовать Discrete Device Assignment (DDA) для проброса поддерживаемой видеокарты.
 
 > [!IMPORTANT]
-> Unlike bare metal, iGPU/APUs are not visible to the VM by default and require DDA support for GPU passthrough. Additionally, most discrete GPUs, even if natively supported, may not work if passed through with DDA. Refer to the [limitations](https://github.com/Qonfused/OSX-Hyper-V?tab=readme-ov-file#limitations) section for an overview of current support in Hyper-V.
+> В отличие от bare metal, iGPU/APU по умолчанию невидимы для VM и требуют поддержки DDA для проброса GPU. Кроме того, большинство дискретных GPU, даже если они нативно поддерживаются, могут не работать при пробросе через DDA. Смотрите раздел с [ограничениями](https://github.com/Qonfused/OSX-Hyper-V?tab=readme-ov-file#limitations) для обзора текущей поддержки в Hyper-V.
 
-For a general overview of hardware support, refer to the [CPU Support](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#cpu-support) and [GPU Support](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#gpu-support) sections of the Dortania guide for a breakdown of hardware support by macOS version.
+Для общего обзора поддержки оборудования обратитесь к разделам [Поддержка CPU](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#cpu-support) и [Поддержка GPU](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#gpu-support) руководства Dortania для разбора поддержки аппаратуры по версиям macOS.
 
-To setup OpenCore for your specific CPU, follow the Intel or AMD section of the [Dortania Install](https://dortania.github.io/OpenCore-Install-Guide/) guide for your CPU family. Ignore any USB mapping, firmware, or motherboard-specific sections as they are not relevant to Hyper-V (which provides its own virtualized hardware).
+Чтобы настроить OpenCore для вашего CPU, следуйте разделам для Intel или AMD в руководстве Dortania [Dortania Install](https://dortania.github.io/OpenCore-Install-Guide/) для вашей семьи CPU. Игнорируйте любые разделы про USB-маппинг, прошивки или материнские платы, так как они не релевантны для Hyper-V (Hyper-V предоставляет своё виртуальное оборудование).
 
-See the below sections for a breakdown of hardware support and Hyper-V-specific configuration.
+Ниже — дополнительная информация о поддержке аппаратуры и специфические настройки для Hyper-V.
 
 #### Intel
 
 > [!NOTE]
-> For Intel Tiger Lake and newer (11th Gen and newer), you can follow the Dortania install guide for [Comet Lake](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html).
+> Для Intel Tiger Lake и новее (11-го поколения и новее) можно следовать руководству Dortania для [Comet Lake](https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html).
 >
-> You'll need to spoof your CPU as Comet Lake by using the below CPUID patch:
+> Нужно подменить идентификацию CPU на Comet Lake, используя следующий CPUID патч:
 > ```yml
 > Kernel:
->   Emulate:
->     Cpuid1Data: Data | <55 06 0A 00 00 00 00 00 00 00 00 00 00 00 00 00>
->     Cpuid1Mask: Data | <FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00>
+> Emulate:
+> Cpuid1Data: Data | <55060A00000000000000000000000000>
+> Cpuid1Mask: Data | <FF FF FF FF000000000000000000000000>
 > ```
-> Add this to the **config.yml** file under the `Kernel -> Emulate` section or
-> manually to the generated **config.plist** file under `EFI/OC/config.plist`.
+> Добавьте это в файл `config.yml` в секцию `Kernel -> Emulate` или вручную в сгенерированный `config.plist` под `EFI/OC/config.plist`.
 >
-> See [Cpuid1Data](https://github.com/Qonfused/OCE-Build/blob/main/docs/schema.md#kernel---emulate---cpuid1data) for other available CPUID patches for better XCPM support.
+> См. [Cpuid1Data](https://github.com/Qonfused/OCE-Build/blob/main/docs/schema.md#kernel---emulate---cpuid1data) для других доступных CPUID патчей для лучшей поддержки XCPM.
 
-Below is a list of supported CPU generations and their initial and latest supported macOS versions:
+Ниже список поддерживаемых поколений CPU и их первая/последняя поддерживаемые версии macOS:
 
-##### Desktop CPUs:
+##### Desktop CPU:
 
-| Generation                      | Initial Support            | Latest Support              |
+| Поколение | Первая поддержка | Последняя поддержка |
 | ------------------------------- | -------------------------- | --------------------------- |
-| [Penryn](ID-1)                  | OS X 10.4.10 (Tiger)       | macOS 10.13.6 (High Sierra) |
-| [Clarkdale (1st Gen)](ID-2)     | OS X 10.6.3 (Snow Leopard) | macOS 12 (Monterey)         |
-| [Sandy Bridge (2nd Gen)](ID-3)  | OS X 10.6.7 (Snow Leopard) | macOS 12 (Monterey)         |
-| [Ivy Bridge (3rd Gen)](ID-4)    | OS X 10.7 (Lion)           | macOS 12 (Monterey)         |
-| [Haswell (4th Gen)](ID-5)       | OS X 10.8 (Mountain Lion)  | (Current)                   |
-| [Skylake (6th Gen)](ID-6)       | OS X 10.11 (El Capitan)    | (Current)                   |
-| [Kaby Lake (7th Gen)](ID-7)     | macOS 10.12 (Sierra)       | (Current)                   |
-| [Coffee Lake (8th Gen)](ID-8 )  | macOS 10.13 (High Sierra)  | (Current)                   |
-| [Comet Lake (10th Gen)](ID-9)   | macOS 10.15 (Catalina)     | (Current)                   |
+| [Penryn](ID-1) | OS X10.4.10 (Tiger) | macOS10.13.6 (High Sierra) |
+| [Clarkdale (1st Gen)](ID-2) | OS X10.6.3 (Snow Leopard) | macOS12 (Monterey) |
+| [Sandy Bridge (2nd Gen)](ID-3) | OS X10.6.7 (Snow Leopard) | macOS12 (Monterey) |
+| [Ivy Bridge (3rd Gen)](ID-4) | OS X10.7 (Lion) | macOS12 (Monterey) |
+| [Haswell (4th Gen)](ID-5) | OS X10.8 (Mountain Lion) | (Текущая) |
+| [Skylake (6th Gen)](ID-6) | OS X10.11 (El Capitan) | (Текущая) |
+| [Kaby Lake (7th Gen)](ID-7) | macOS10.12 (Sierra) | (Текущая) |
+| [Coffee Lake (8th Gen)](ID-8 ) | macOS10.13 (High Sierra) | (Текущая) |
+| [Comet Lake (10th Gen)](ID-9) | macOS10.15 (Catalina) | (Текущая) |
 
 [ID-1]: https://dortania.github.io/OpenCore-Install-Guide/config.plist/penryn.html
 [ID-2]: https://dortania.github.io/OpenCore-Install-Guide/config.plist/clarkdale.html
@@ -435,21 +434,21 @@ Below is a list of supported CPU generations and their initial and latest suppor
 [ID-8]: https://dortania.github.io/OpenCore-Install-Guide/config.plist/coffee-lake.html
 [ID-9]: https://dortania.github.io/OpenCore-Install-Guide/config.plist/comet-lake.html
 
-##### Mobile CPUs:
+##### Мобильные CPU:
 
-| Generation                     | Initial Support            | Latest Support              |
-| ------------------------------ | -------------------------- | --------------------------- |
-| [Arrandale (1st Gen)](IM-1)    | OS X 10.6.3 (Snow Leopard) | macOS 10.13 (High Sierra)   |
-| [Sandy Bridge (2nd Gen)](IM-2) | OS X 10.6.7 (Snow Leopard) | macOS 12 (Monterey)         |
-| [Ivy Bridge (3rd Gen)](IM-3)   | OS X 10.7 (Lion)           | macOS 12 (Monterey)         |
-| [Haswell (4th Gen)](IM-4)      | OS X 10.8 (Mountain Lion)  | macOS 12 (Monterey)         |
-| [Broadwell (5th Gen)](IM-5)    | OS X 10.10 (Yosemite)      | macOS 12 (Monterey)         |
-| [Skylake (6th Gen)](IM-6)      | OS X 10.11 (El Capitan)    | (Current)                   |
-| [Kaby Lake (7th Gen)](IM-7)    | macOS 10.12 (Sierra)       | (Current)                   |
-| [Coffee Lake (8th Gen)](IM-8)  | macOS 10.13 (High Sierra)  | (Current)                   |
-| [Whiskey Lake (8th Gen)](IM-8) | macOS 10.14.1 (Mojave)     | (Current)                   |
-| [Comet Lake (10th Gen)](IM-9)  | macOS 10.15.4 (Catalina)   | (Current)                   |
-| [Ice Lake (10th Gen)](IM-10)    | macOS 10.15.4 (Catalina)   | (Current)                   |
+| Поколение | Первая поддержка | Последняя поддержка |
+| ------------------------------ | ---------------------- | --------------------------- |
+| [Arrandale (1st Gen)](IM-1) | OS X10.6.3 (Snow Leopard) | macOS10.13 (High Sierra) |
+| [Sandy Bridge (2nd Gen)](IM-2) | OS X10.6.7 (Snow Leopard) | macOS12 (Monterey) |
+| [Ivy Bridge (3rd Gen)](IM-3) | OS X10.7 (Lion) | macOS12 (Monterey) |
+| [Haswell (4th Gen)](IM-4) | OS X10.8 (Mountain Lion) | macOS12 (Monterey) |
+| [Broadwell (5th Gen)](IM-5) | OS X10.10 (Yosemite) | macOS12 (Monterey) |
+| [Skylake (6th Gen)](IM-6) | OS X10.11 (El Capitan) | (Текущая) |
+| [Kaby Lake (7th Gen)](IM-7) | macOS10.12 (Sierra) | (Текущая) |
+| [Coffee Lake (8th Gen)](IM-8) | macOS10.13 (High Sierra) | (Текущая) |
+| [Whiskey Lake (8th Gen)](IM-8) | macOS10.14.1 (Mojave) | (Текущая) |
+| [Comet Lake (10th Gen)](IM-9) | macOS10.15.4 (Catalina) | (Текущая) |
+| [Ice Lake (10th Gen)](IM-10) | macOS10.15.4 (Catalina) | (Текущая) |
 
 [IM-1]: https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/arrandale.html
 [IM-2]: https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/sandy-bridge.html
@@ -465,87 +464,87 @@ Below is a list of supported CPU generations and their initial and latest suppor
 #### AMD
 
 > [!IMPORTANT]
-> AMD CPUs require the [`Kernel -> Emulate -> DummyPowerManagement`](https://github.com/Qonfused/OCE-Build/blob/main/docs/schema.md#kernel---emulate---dummypowermanagement) option to be enabled in the config.plist as AMD does not have a native power management driver in macOS:
+> AMD CPU требуют включения опции `Kernel -> Emulate -> DummyPowerManagement` в `config.plist`, так как у AMD нет родного драйвера управления питанием в macOS:
 > ```yml
 > Kernel:
->   Emulate:
->     DummyPowerManagement:   Boolean | true
+> Emulate:
+> DummyPowerManagement: Boolean | true
 > ```
 
-Below is a list of supported CPU generations and their initial and latest supported macOS versions:
+Ниже список поддерживаемых поколений и их первая/последняя поддерживаемые версии macOS:
 
-| Generation                 | Initial Support        | Latest Support      |
+| Поколение | Первая поддержка | Последняя поддержка |
 | -------------------------- | ---------------------- | ------------------- |
-| [Bulldozer (15h)](AD-1)    | macOS 13 (High Sierra) | macOS 12 (Monterey) |
-| [Jaguar (16h)](AD-1)       | macOS 13 (High Sierra) | macOS 12 (Monterey) |
-| [Ryzen (17h)](AD-2)        | macOS 13 (High Sierra) | (Current)           |
-| [Threadripper (19h)](AD-2) | macOS 13 (High Sierra) | (Current)           |
+| [Bulldozer (15h)](AD-1) | macOS13 (High Sierra) | macOS12 (Monterey) |
+| [Jaguar (16h)](AD-1) | macOS13 (High Sierra) | macOS12 (Monterey) |
+| [Ryzen (17h)](AD-2) | macOS13 (High Sierra) | (Текущая) |
+| [Threadripper (19h)](AD-2) | macOS13 (High Sierra) | (Текущая) |
 
 [AD-1]: https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html
 [AD-2]: https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html
 
-In addition to [AMD kernel patches](https://github.com/AMD-OSX/AMD_Vanilla) (for AMD CPU families 15h, 16h, 17h and 19h), the below kernel patch is required for High Sierra and above:
+В дополнение к [патчам ядра для AMD](https://github.com/AMD-OSX/AMD_Vanilla) (для семейств CPU AMD15h,16h,17h и19h), следующий патч ядра требуется для High Sierra и выше:
 
 ```yml
 Kernel:
-  Patch:
-    - Arch:                 String  | "x86_64"
-      Base:                 String  | "_cpu_syscall_init"
-      Comment:              String  | "flagers - kill invalid wrmsr | 10.13+"
-      Count:                Number  | 3
-      Find:                 Data    | "0F30"
-      Identifier:           String  | "kernel"
-      MaxKernel:            String  | ""
-      MinKernel:            String  | "17.0.0"
-      Replace:              Data    | "9090"
+ Patch:
+ - Arch: String | "x86_64"
+ Base: String | "_cpu_syscall_init"
+ Comment: String | "flagers - kill invalid wrmsr |10.13+"
+ Count: Number |3
+ Find: Data | "0F30"
+ Identifier: String | "kernel"
+ MaxKernel: String | ""
+ MinKernel: String | "17.0.0"
+ Replace: Data | "9090"
 ```
 
-You can also manually add the below plist entry to your config.plist:
+Вы также можете вручную добавить ниже приведённую запись plist в ваш `config.plist`:
 
-<details><summary>Plist entry (file: <a href="https://github.com/user-attachments/files/18508274/patch.plist.zip">patch.plist.zip</a>)</summary>
+<details><summary>Запись plist (файл: <a href="https://github.com/user-attachments/files/18508274/patch.plist.zip">patch.plist.zip</a>)</summary>
 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Kernel</key>
-    <dict>
-        <key>Patch</key>
-        <array>
-            <dict>
-                <key>Arch</key>
-                <string>x86_64</string>
-                <key>Base</key>
-                <string>_cpu_syscall_init</string>
-                <key>Comment</key>
-                <string>flagers - kill invalid wrmsr | 10.13+</string>
-                <key>Count</key>
-                <integer>3</integer>
-                <key>Enabled</key>
-                <true/>
-                <key>Find</key>
-                <data>DzA=</data>
-                <key>Identifier</key>
-                <string>kernel</string>
-                <key>Limit</key>
-                <integer>0</integer>
-                <key>Mask</key>
-                <data></data>
-                <key>MaxKernel</key>
-                <string></string>
-                <key>MinKernel</key>
-                <string>17.0.0</string>
-                <key>Replace</key>
-                <data>kJA=</data>
-                <key>ReplaceMask</key>
-                <data></data>
-                <key>Skip</key>
-                <integer>0</integer>
-            </dict>
-        </array>
-    </dict>
+ <key>Kernel</key>
+ <dict>
+ <key>Patch</key>
+ <array>
+ <dict>
+ <key>Arch</key>
+ <string>x86_64</string>
+ <key>Base</key>
+ <string>_cpu_syscall_init</string>
+ <key>Comment</key>
+ <string>flagers - kill invalid wrmsr |10.13+</string>
+ <key>Count</key>
+ <integer>3</integer>
+ <key>Enabled</key>
+ <true/>
+ <key>Find</key>
+ <data>DzA=</data>
+ <key>Identifier</key>
+ <string>kernel</string>
+ <key>Limit</key>
+ <integer>0</integer>
+ <key>Mask</key>
+ <data></data>
+ <key>MaxKernel</key>
+ <string></string>
+ <key>MinKernel</key>
+ <string>17.0.0</string>
+ <key>Replace</key>
+ <data>kJA=</data>
+ <key>ReplaceMask</key>
+ <data></data>
+ <key>Skip</key>
+ <integer>0</integer>
+ </dict>
+ </array>
+ </dict>
 </dict>
 </plist>
 ```
@@ -553,137 +552,132 @@ You can also manually add the below plist entry to your config.plist:
 </details>
 
 > [!NOTE]
-> When applying the AMD kernel patches, choose a core count matching the number
-> of cores assigned to the VM when configuring the CPU core count
-> (i.e. the `algrey - Force cpuid_cores_per_package`) patches.
+> При применении AMD патчей ядра выбирайте количество ядер, соответствующее числу ядер, выделенных виртуальной машине при конфигурации CPU (т.е. патчи `algrey - Force cpuid_cores_per_package`).
 >
-> For example, on a 6-Core AMD Ryzen 9600X, you may find it helpful to assign 6
-> cores to the VM and use `06` for the `cpuid_cores_per_package` patch. If you
-> encounter issues booting when assigning 6 cores, try assigning 8 cores instead
-> and using `08` for the `cpuid_cores_per_package` patch (see [#37](https://github.com/Qonfused/OSX-Hyper-V/issues/37)).
+> Например, для6-ядерного AMD Ryzen9600X рекомендуется выделить6 ядер VM и использовать `06` для патча `cpuid_cores_per_package`. Если возникают проблемы при загрузке с6 ядрами, попробуйте выделить8 ядер и использовать `08` для патча (см. [#37](https://github.com/Qonfused/OSX-Hyper-V/issues/37)).
 
 > [!TIP]
-> You can use the `amd.ps1` script to automatically generate these AMD patches for your CPU by running the below command:
+> Вы можете использовать скрипт `amd.ps1` для автоматической генерации AMD патчей для вашего CPU, выполнив:
 > ```powershell
 > .\scripts\amd.ps1 --cpu <core_count>
 > ```
 >
-> Notice that this requires the `--cpu` option to be set to the number of cores assigned to the VM.
+> Обратите внимание, что требуется опция `--cpu`, указанная как количество ядер, выделенных VM.
 
-### 3. Build this repository using OCE-Build
+### 3. Сборка репозитория с помощью OCE-Build
 
-This project uses [OCE-Build](https://github.com/Qonfused/OCE-Build) to automatically version and build this repository's EFI.
+Этот проект использует [OCE-Build](https://github.com/Qonfused/OCE-Build) для автоматического версионирования и сборки EFI этого репозитория.
 
 > [!IMPORTANT]
-> To run powershell scripts, you may need to set your execution policy using:
+> Для запуска PowerShell скриптов может потребоваться изменить политику выполнения:
 > ```powershell
 > Set-ExecutionPolicy RemoteSigned
 > ```
 
-To build this project's EFI, run one of the below commands at the root of the project:
+Чтобы собрать EFI проекта, выполните одну из команд в корне проекта:
 ```powershell
-# Build for macOS 10.8 and newer
+# Собрать для macOS10.8 и новее
 .\scripts\build.ps1
 
-# Build for macOS 10.7 and older
+# Собрать для macOS10.7 и старее
 .\scripts\build.ps1 --legacy
 
-# Build for macOS 10.4 - 10.5, 10.6 if running in 32-bit mode
+# Собрать для macOS10.4 -10.5,10.6 в32-битном режиме
 .\scripts\build.ps1 --legacy --32-bit
 ```
 
-This will create a new `dist/` directory containing the EFI.vhdx virtual disk and a `dist/Scripts/` directory containing various scripts for creating and configuring the virtual machine.
+Это создаст новую директорию `dist/` с виртуальным диском `EFI.vhdx` и директорией `dist/Scripts/`, содержащей скрипты для создания и настройки виртуальной машины.
 
-### 4. Setting up Hyper-V
+### 4. Настройка Hyper-V
 
-First check that you've [enabled Hyper-V](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) before proceeding.
-- You can enable the Hyper-V role by running the below command in PowerShell as administrator:
-  ```ps
-  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-  ```
-- After rebooting, you can check that you've successfully enabled Hyper-V by running:
-  ```ps
-  Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V
-  ```
+Сначала убедитесь, что вы [включили Hyper-V](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) перед продолжением.
+- Вы можете включить роль Hyper-V выполнив команду в PowerShell от имени администратора:
+ ```ps
+ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+ ```
+- После перезагрузки проверьте успешность включения Hyper-V:
+ ```ps
+ Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V
+ ```
 
 > [!TIP]
-> After **building** or **downloading this project's EFI**, you can run the `create-virtual-machine.ps1` script to quickly setup a new virtual-machine.
+> После **сборки** или **загрузки** EFI этого проекта вы можете запустить скрипт `create-virtual-machine.ps1` для быстрого создания новой виртуальной машины.
 > 
-> For example, from a local build of this project:
+> Например, из локальной сборки проекта:
 >
 > ```powershell
-> # Use the latest version of macOS (cpu=2 cores, ram=8 GB, size=50 GB)
+> # Использовать последнюю версию macOS (cpu=2 ядра, ram=8 ГБ, size=50 ГБ)
 > .\dist\Scripts\create-virtual-machine.ps1 -name "My New Virtual Machine"
 > 
-> # Use an older version of macOS (cpu=4 cores, ram=16 GB, size=128 GB)
-> .\dist\Scripts\create-virtual-machine.ps1 -name "Catalina" -version 10.15 -cpu 4 -ram 16 -size 128
+> # Использовать более старую версию macOS (cpu=4 ядра, ram=16 ГБ, size=128 ГБ)
+> .\dist\Scripts\create-virtual-machine.ps1 -name "Catalina" -version10.15 -cpu4 -ram16 -size128
 > ```
-> or from a downloaded release:
+> или из загруженного релиза:
 > ```powershell
-> cd ~/Downloads/EFI-1.0.0-64-bit-DEBUG # Scripts are packaged with releases
+> cd ~/Downloads/EFI-1.0.0-64-bit-DEBUG # Скрипты поставляются с релизами
 > 
-> # Use the latest version of macOS (cpu=2 cores, ram=8 GB, size=50 GB)
+> # Использовать последнюю версию macOS (cpu=2 ядра, ram=8 ГБ, size=50 ГБ)
 > .\Scripts\create-virtual-machine.ps1 -name "My New Virtual Machine"
 > 
-> # Use an older version of macOS (cpu=4 cores, ram=16 GB, size=128 GB)
-> .\Scripts\create-virtual-machine.ps1 -name "Catalina" -version 10.15 -cpu 4 -ram 16 -size 128
+> # Использовать более старую версию macOS (cpu=4 ядра, ram=16 ГБ, size=128 ГБ)
+> .\Scripts\create-virtual-machine.ps1 -name "Catalina" -version10.15 -cpu4 -ram16 -size128
 > ```
 
 > [!IMPORTANT]
-> Newer macOS versions (Big Sur and newer) require 6-8 GB of RAM to boot the installer. If you are using an older version of macOS, you can use less RAM (4 GB is the minimum).
+> Новые версии macOS (Big Sur и новее) требуют6-8 ГБ ОЗУ для загрузки установщика. Для более старых версий можно использовать меньше памяти (минимум4 ГБ для Catalina и старее).
 
-Below outline the steps to manually create a new virtual machine for macOS:
+Ниже изложены шаги для ручного создания новой виртуальной машины для macOS:
 
 ---
 
-#### i. Create a boot VHDX disk
+#### i. Создание загрузочного VHDX диска
 
-Format a small (1GB) FAT32 disk initialized with GPT (GUID partition table) and mount it. This will serve as the boot partition for your macOS virtual machine and contain the OpenCore EFI folder.
-- Choose one of three ways of creating VHD/VHDX disks:
-  - (A) Hyper-V Manager - Navigate to `Action > New > Hard Disk`. <br>![A-VHD](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/A-VHD.png)
-    - Hard disks are located under `C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\`.
-    - You can mount a VHD/VHDX disk by right clicking on the file and selecting `Mount`.
-    - You can unmount by right-clicking on the mounted disk and selecting `Eject`.
-  - (B) Disk Management - Navigate to `Action > Create VHD`. <br>![B-VHD](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/B-VHD.png)
-    - Make sure to initialize the disk as GPT and create a new FAT32 partition.
-    - You can mount a VHD/VHDX disk with `Action > Attach VHD`.
-    - You can unmount by right-clicking on the volume and selecting `Detach VHD`.
-  - (C) Powershell - Create a new VHD/VHDX disk with the [`New-VHD`][ps/New-VHD] command.
-    <details><summary>(Powershell command)</summary>
+Отформатируйте небольшой (1 ГБ) диск в FAT32 и инициализируйте как GPT. Смонтируйте диск — он будет служить загрузочным разделом для вашей VM и будет содержать папку OpenCore EFI.
+- Выберите один из трёх способов создания VHD/VHDX:
+ - (A) Hyper-V Manager - Перейдите в `Action > New > Hard Disk`. <br>![A-VHD](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/A-VHD.png)
+ - Файлы виртуальных дисков находятся в `C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\`.
+ - Смонтировать VHD/VHDX можно правой кнопкой по файлу -> `Mount`.
+ - Отмонтировать — `Eject`.
+ - (B) Disk Management - Перейдите в `Action > Create VHD`. <br>![B-VHD](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/B-VHD.png)
+ - Инициализируйте диск как GPT и создайте новый раздел FAT32.
+ - Смонтировать VHD/VHDX: `Action > Attach VHD`.
+ - Отмонтировать: правой кнопкой по тому же тому -> `Detach VHD`.
+ - (C) Powershell - Создать VHD/VHDX с помощью `New-VHD`:
+ <details><summary>(Команда PowerShell)</summary>
 
-    ```ps
-    # Run this command in PowerShell as Administrator
+ ```ps
+ # Выполните в PowerShell от имени администратора
 
-    $vhdpath = "$env:USERPROFILE\Desktop\EFI.vhdx"
-    $vhdsize = 1GB
-    $vhdpart = "GPT"
-    $vhdfs = "FAT32"
-    New-VHD -Path $vhdpath -Dynamic -SizeBytes $vhdsize |
-      Mount-VHD -Passthru |
-      Initialize-Disk -PartitionStyle $vhdpart -Confirm:$false -Passthru |
-      New-Partition -AssignDriveLetter -UseMaximumSize |
-      Format-Volume -FileSystem $vhdfs -Confirm:$false -Force
-    ```
+ $vhdpath = "$env:USERPROFILE\Desktop\EFI.vhdx"
+ $vhdsize =1GB
+ $vhdpart = "GPT"
+ $vhdfs = "FAT32"
+ New-VHD -Path $vhdpath -Dynamic -SizeBytes $vhdsize |
+ Mount-VHD -Passthru |
+ Initialize-Disk -PartitionStyle $vhdpart -Confirm:$false -Passthru |
+ New-Partition -AssignDriveLetter -UseMaximumSize |
+ Format-Volume -FileSystem $vhdfs -Confirm:$false -Force
+ ```
 
-    </details>
+ </details>
 
-Move the EFI folder (the whole folder) to the root of the VHDX disk.
-- You should be left with an `EFI/` folder at the root of your EFI VHDX disk.
+Перенесите папку `EFI` (всю папку) в корень VHDX диска.
+- В корне вашего EFI VHDX диска должна остаться папка `EFI/`.
 
 [ps/New-VHD]: https://learn.microsoft.com/en-us/powershell/module/hyper-v/new-vhd
 
 ---
 
-#### ii. Create a macOS installer/recovery VHDX disk
-Create or add an installer disk with either of the below methods:
-- (A) Download a BaseSystem or Recovery image file directly from Apple using [macrecovery.py][OpenCorePkg]:
-  - Follow the [Dortania-Guide][Dortania-Guide/Installer#Windows] for steps on downloading macOS installer images.
-  - Move both `.chunklist` and `.dmg` files downloaded by macrecovery to your EFI VHDX disk under a new folder named `com.apple.recovery.boot`. You should be left with both an `EFI/` and `com.apple.recovery.boot/` folder at the root of your EFI VHDX disk.
-- (B) Convert a DMG installer to a VHDX disk with [`qemu-img`][qemu-img/docs]:
-  - If you already have a DMG installer for macOS (e.g. on Sierra and older), you can convert the installer image to a VHDX disk directly by running qemu-img with the command:
-    ```powershell
-    qemu-img.exe convert -f raw -O vhdx InstallMacOSX.dmg InstallMacOSX.vhdx
-    ```
+#### ii. Создание VHDX диска с установщиком/восстановлением macOS
+Создайте или добавьте диск установщика одним из способов ниже:
+- (A) Скачать `BaseSystem` или `Recovery` образ напрямую с Apple используя `macrecovery.py`:
+ - Следуйте руководству Dortania [Dortania-Guide/Installer#Windows] для шагов по загрузке образов установщика macOS.
+ - Переместите файлы `.chunklist` и `.dmg`, скачанные `macrecovery`, в папку `com.apple.recovery.boot` на вашем EFI VHDX диске. В итоге в корне должны быть папки `EFI/` и `com.apple.recovery.boot/`.
+- (B) Конвертировать DMG установщика в VHDX с помощью `qemu-img`:
+ - Если у вас уже есть DMG установщика macOS (например для Sierra и старее), вы можете конвертировать образ в VHDX:
+ ```powershell
+ qemu-img.exe convert -f raw -O vhdx InstallMacOSX.dmg InstallMacOSX.vhdx
+ ```
 
 [qemu-img/docs]: https://cloudbase.it/qemu-img-windows/
 [OpenCorePkg]: https://github.com/acidanthera/OpenCorePkg/releases
@@ -691,144 +685,111 @@ Create or add an installer disk with either of the below methods:
 
 ---
 
-#### iii. Creating the macOS Virtual Machine
+#### iii. Создание виртуальной машины macOS
 
-In the Hyper-V Manager, navigate to `Action > New > Virtual Machine`.
+В Hyper-V Manager выберите `Action > New > Virtual Machine`.
 
 ![3-New-VM](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/3-New-VM.png)
 
-Configure the below options while going through the wizard:
-- **Specify Generation**: Choose `Generation 2`.
-- **Assign Memory**: Allocate at least `4096 MB` (recommended is `8192 MB` for Big Sur and newer).
-- **Configure Networking**: Choose the default network switch.
-- **Connect Virtual Hard Disk**: Name and select the size of the disk to install macOS on.
+При создании укажите следующие параметры:
+- **Specify Generation**: Выберите `Generation2`.
+- **Assign Memory**: Выделите минимум `4096 MB` (рекомендуется `8192 MB` для Big Sur и новее).
+- **Configure Networking**: Оставьте сетевой переключатель по умолчанию.
+- **Connect Virtual Hard Disk**: Назовите и укажите размер диска для установки macOS.
 
-Once created, right click on your new virtual-machine (under the 'Virtual Machines' section of the window), and select `Settings`.
+После создания правой кнопкой по VM -> `Settings`.
 
 ![3-VM-Settings](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/3-VM-Settings.png)
 
-Then configure the below options under the Hardware section:
-- Navigate to 'Security' and uncheck `Enable Secure Boot` (disable).
-- Navigate to 'SCSI Controller' and add a new hard drive for your EFI VHDX (and installer VHDX if applicable).
-  - You'll need to attach your EFI VHDX with a location value of `0` and change the location value for your main virtual hard disk to a different value (e.g. `1` or `2`). This is to ensure that the EFI disk is the first disk in the boot order.
+Затем настройте следующие опции в разделе Hardware:
+- Перейдите в `Security` и отключите `Enable Secure Boot`.
+- Перейдите в `SCSI Controller` и добавьте новый жёсткий диск для вашего EFI VHDX (и диска установщика, если он есть).
+ - Прикрепите EFI VHDX с `location`0 и измените `location` для основного виртуального диска на другое значение (например `1` или `2`). Это нужно, чтобы EFI диск был первым в порядке загрузки.
 
 ---
 
-### 5. Using this EFI with macOS
+### 5. Использование этого EFI с macOS
 
-Refer to the [Installation Process][Dortania-Guide/Installation-Process] section of the Dortania Guide. Some additional post-install sections are provided to facilitate with Hyper-V (or project) specifics.
+Смотрите раздел [Процесс установки][Dortania-Guide/Installation-Process] руководства Dortania. Дополнительные пост-инсталляционные шаги приведены для удобства с Hyper-V (или особенностей проекта).
 
-  <!--
-  Another user's suggestion for installation steps (for reference):
-     1. Run PS script to create VM
-     2. Start VM, open Console
-     3. boot to EFI (dmg) to launch recovery menu
-     4. Enter Disk Utility
-     5. Choose "Msft Virtual Disk Media", Select "Erase"
-     6. Name new drive "MyInteralDrive", choose AFPS for filesystem format
-     7. Execute Erase
-     8. Quit Disk Utility
-     9. Back at main menu for the Recovery program, choose "Reinstall macOS "
-    10. Select your newly minted AFPS-formatted disk
-    11. Let macOS do it's thing for approx 2 hours.
+ <!--
+ Другой пользователь предложил следующие шаги (для справки):
+1. Запустить PS скрипт для создания VM
+2. Запустить VM, открыть Console
+3. Загрузиться в EFI (dmg) чтобы запустить меню восстановления
+4. Открыть Дисковую утилиту
+5. Выбрать "Msft Virtual Disk Media", нажать "Erase"
+6. Назвать новый диск "MyInteralDrive", выбрать AFPS
+7. Выполнить стирание
+8. Выйти из Дисковой утилиты
+9. В главном меню Recovery выбрать "Reinstall macOS"
+10. Выбрать только что созданный AFPS-диск
+11. Дождаться установки (~2 часа).
   -->
 
-A basic summary of the installation process is as follows:
+Краткое описание процесса установки:
 
-1. Start the virtual machine and select the `EFI (dmg)` from the OpenCore boot menu.
-   - If you created a separate macOS installer VHDX, this may also show up as `macOS Base System (External)` or `Install macOS Big Sur (External)` depending on the version of macOS you are installing.
-2. Once the installer loads, open Disk Utility from the Utilities menu.
-   - Select the `Msft Virtual Disk Media` (your main virtual hard disk) from the list of disks.
-   - Click `Erase` to format the disk.
-     - Name the disk as desired (e.g., `macOS` or `Macintosh HD`, etc.).
-     - For macOS 10.13 and newer, use the `APFS` format. For older versions, use `Mac OS Extended (Journaled)`.
-4. Quit Disk Utility and return to the main installer menu.
-5. Select `Reinstall macOS` to start the main installer.
-   - Follow the prompts to install macOS on your newly formatted disk.
-   - Make sure to target the disk you just formatted (e.g., `macOS` or whatever you named it), not the EFI disk.
-   - Note that this process may take a while (upwards of 30 minutes to 2 hours).
-6. Once the installation is complete, the virtual machine will reboot and you should see the OpenCore boot menu again.
-   - This may require multiple reboots to install additional components and finalize the installation.
-7. Select the newly installed macOS disk (or whatever you named it) from the OpenCore boot menu to boot into macOS.
-    - If you are still unable to boot into your macOS installation, you may need to select the installer disk again.
-    - You can set this as the default boot entry by holding the `Ctrl` key while selecting the disk.
+1. Запустите виртуальную машину и выберите `EFI (dmg)` в меню загрузчика OpenCore.
+   - Если вы создали отдельный VHDX установщика macOS, он может отображаться как `macOS Base System (External)` или `Install macOS Big Sur (External)` в зависимости от версии.
+2. Когда загрузится установщик, откройте Disk Utility через меню Utilities.
+   - Выберите `Msft Virtual Disk Media` (ваш основной виртуальный диск) и нажмите `Erase` для форматирования.
+     - Дайте диску имя (например, `macOS` или `Macintosh HD`).
+     - Для macOS10.13 и новее используйте `APFS`. Для старых версий используйте `Mac OS Extended (Journaled)`.
+4. Выйдите из Disk Utility и вернитесь в главное меню установщика.
+5. Выберите `Reinstall macOS` и следуйте подсказкам для установки на отформатированный диск.
+   - Убедитесь, что выбрали правильный диск для установки (тот, который вы только что отформатировали).
+   - Установка может занять значительное время (30 минут —2 часа).
+6. После завершения установки виртуальная машина перезагрузится и вы увидите меню OpenCore.
+   - Может потребоваться несколько перезагрузок для завершения установки.
+7. Выберите установленный диск (или имя, которое вы задали) для загрузки macOS.
+   - Если загрузка не проходит, возможно, придётся снова выбрать диск установщика.
+   - Можно сделать запись загрузки по умолчанию, удерживая `Ctrl` при выборе диска.
 
-The EFI virtual disk created by this project bundles a post-installation script responsible for installing the **MacHyperVFramebuffer** driver and configuring daemons for additional Hyper-V service support. This is required to support resolution changes and the hardware cursor in macOS.
+Виртуальный EFI диск, создаваемый этим проектом, включает пост-инсталляционный скрипт, который устанавливает драйвер `MacHyperVFramebuffer` и настраивает демоны для дополнительной поддержки сервисов Hyper-V. Это требуется для поддержки изменения разрешения и аппаратного курсора в macOS.
 
-To run this script, execute the `post-install.sh` script from the EFI disk located in the `Scripts/` directory. For example, you can run the following command in Terminal after booting into the macOS installer:
+Чтобы выполнить этот скрипт, запустите `post-install.sh` с EFI диска из каталога `Scripts/`. Например, в терминале macOS во время установки выполните:
 
 ```bash
-cd /Volumes/EFI # Change to the EFI disk
+cd /Volumes/EFI # Перейти на EFI диск
 bash ./Scripts/post-install.sh
 ```
 
-You can also optionally run the `optimize-vm.sh` script to disable Spotlight indexing, reduce disk I/O, and turn off system animations. This is recommended for virtual machines with CPU-rendered graphics and limited disk performance.
+Опционально можно запустить скрипт `optimize-vm.sh` для отключения индексирования Spotlight, уменьшения дисковой активности и отключения системных анимаций. Это рекомендуется для виртуальных машин с графикой, рендерящейся CPU, и с ограниченной производительностью диска.
 
 ```bash
-cd /Volumes/EFI # Change to the EFI disk
+cd /Volumes/EFI # Перейти на EFI диск
 bash ./Scripts/optimize-vm.sh
 ```
 
 [Dortania-Guide/Installation-Process]: https://dortania.github.io/OpenCore-Install-Guide/installation/installation-process.html
 
-### 6. Troubleshooting
+### 6. Устранение неполадок
 
-If you encounter issues during the installation or boot process, feel free to [create a GitHub issue](https://github.com/Qonfused/OSX-Hyper-V/issues/new) and provide as much detail as possible about your setup, including:
-- The version of macOS you are trying to install.
-- The version of Windows you are running Hyper-V on.
-- The CPU you are using (e.g. Intel i7-9700K, AMD Ryzen 5 3600, etc.).
-- The number of CPU cores and amount of RAM assigned to the virtual machine.
-- Any error messages you are seeing in the OpenCore boot menu or during the installation process.
+Если вы столкнулись с проблемами во время установки или загрузки, можете [создать issue на GitHub](https://github.com/Qonfused/OSX-Hyper-V/issues/new) и привести как можно больше деталей о вашей конфигурации, включая:
+- Версию macOS, которую вы пытаетесь установить.
+- Версию Windows, на которой работает Hyper-V.
+- Ваш CPU (например, Intel i7-9700K, AMD Ryzen53600 и т.д.).
+- Число выделенных ядер и объём ОЗУ для виртуальной машины.
+- Любые сообщения об ошибках, появляющиеся в меню OpenCore или во время установки.
 
-There are however some common issues that you may encounter, outlined below:
-- Early reboot after selecting the installer (`#[EB.MM.AKM|!] Err(0xE) <- EB.MM.MKP`)
-  - This usually indicates that the macOS installer does not have enough memory to boot. Make sure you have at least 6-8 GB of RAM for macOS 11 Big Sur and newer, or at least 4 GB for older versions (Catalina and older).
-  - See [#44](https://github.com/Qonfused/OSX-Hyper-V/issues/44) for more details.
-- Stuck on `vm_shared_region_start_address()` or `failed lookup: com.apple.dock.fullscreen`:
-  - Stalling around here usually means the macOS installer GUI couldn't start. You may find other messages related to `WindowServer` or `gui/0` requesting other services (namely `logd` or `recoveryosd`), which serve as a hint for this issue.
-  - Try restarting and clearing NVRAM (using the `Reset NVRAM` option in the OpenCore boot menu) to see if that resolves the issue.
-  - A good workaround if this issue persists is to instead install macOS Catalina (10.15), and then upgrade to the desired version of macOS after installation. See [#53](https://github.com/Qonfused/OSX-Hyper-V/issues/53#issuecomment-3089641792) for details.
-- Reboot after installation when selecting installer.
-  - This is relatively normal behavior. It may require multiple reboots (selecting the macOS installer each time) to complete the installation process.
+Ниже перечислены распространённые проблемы и возможные решения:
+- Ранний перезапуск после выбора установщика (`#[EB.MM.AKM|!] Err(0xE) <- EB.MM.MKP`)
+ - Обычно это означает, что установщику macOS не хватает памяти для загрузки. Убедитесь, что выделено как минимум6-8 ГБ ОЗУ для macOS11 Big Sur и новее, или4 ГБ для старых версий.
+ - Смотрите [#44](https://github.com/Qonfused/OSX-Hyper-V/issues/44) для подробностей.
+- Зависание на `vm_shared_region_start_address()` или `failed lookup: com.apple.dock.fullscreen`:
+ - Задержки в этой области обычно означают, что GUI установщика macOS не смог запуститься. Могут появляться и другие сообщения, связанные с `WindowServer` или `gui/0`, запрашивающие службы (например `logd` или `recoveryosd`).
+ - Попробуйте перезапустить и сбросить NVRAM (опция `Reset NVRAM` в меню OpenCore), чтобы проверить, решит ли это проблему.
+ - Хороший обходной путь — установить macOS Catalina (10.15), а затем обновиться до нужной версии после установки. См. [#53](https://github.com/Qonfused/OSX-Hyper-V/issues/53#issuecomment-3089641792).
+- Перезагрузка после установки при выборе установщика.
+ - Это относительно нормальное поведение. Может потребоваться несколько перезагрузок (с выбором установщика каждый раз) для завершения установки.
 
-#### Limitations
+#### Ограничения
 
-There are some known limitations with the base configuration for Hyper-V:
+Есть известные ограничения в базовой конфигурации для Hyper-V:
 
-- Display Resolution
-  - The default virtual display resolution is set to a 1024x768 resolution, but can be reconfigured by modifying the `SupportedResolutions` entry in MacHyperVFramebuffer's Info.plist file.
-  - See issue [#6](https://github.com/Qonfused/OSX-Hyper-V/issues/6) for more details.
-- Graphics Acceleration
-  - By default, macOS will run using the MacHyperVFramebuffer synthetic graphics driver, which provides basic graphics support (with 8 MB of video memory). This driver is sufficient for basic tasks, but does not provide hardware acceleration or advanced graphics features.
-  - GPU acceleration is possible through [Discrete Device Assignment (DDA)][aka.ms/dda] using a supported GPU, however there exist a couple major caveats:
-    - AMD GPUs (particularly Navi and older GPUs) generally have poor compatibility with macOS through DDA. Natively supported NVIDIA GPUs (using driver v465 or later on Windows) tend to have the best results.
-    - GPU patching with Lilu and WhateverGreen is currently not supported (refer to [#2299](https://github.com/acidanthera/bugtracker/issues/2299) for tracking). This also applies to other kexts like NootedRed/NootedRX that use Lilu.
-- Audio Support
-  - By default, Hyper-V does not expose an audio device to macOS.
-  - See issue [#9](https://github.com/Qonfused/OSX-Hyper-V/issues/9) for more details.
-
-> [!NOTE]
-> DDA is only available for Windows Server and Microsoft Hyper-V Server versions 2016 and newer. Windows Pro and Windows Enterprise users have no support for DDA with Hyper-V.
-
-[aka.ms/dda]: https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/deploy/deploying-graphics-devices-using-dda
-
-#### iServices
-
-To enable **iServices** functionality, you can:
-1. Generate SMBIOS data with [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS)
-  - Follow the Dortania [iServices guide](https://dortania.github.io/OpenCore-Post-Install/universal/iservices.html#using-gensmbios) to generate new SMBIOS data for your machine.
-2. For local builds of this EFI, patch *existing* SMBIOS data automatically.
-  - This is automatically patched each time you run a build using the **.serialdata** file (using existing data or data generated by GenSMBIOS).
-  - Refer to the [**.serialdata.example**](/src/.serialdata.example) file for an example of the entry format.
-
-## 🔥 Contributing
-Contributions of any size to this project are always welcome!
-
-Refer to [CONTRIBUTING.md](/docs/CONTRIBUTING.md) for instructions (and tips) on making contributions to this project.
-
-## ⚖️ License
-[BSD 3-Clause License](/LICENSE).
-
-## 🌟 Credits
-- [@Goldfish64](https://github.com/Goldfish64) for creating and maintaining [MacHyperVSupport](https://github.com/acidanthera/MacHyperVSupport) and it's supporting documentation.
-- [@ssdsl0126](https://github.com/ssdsl0126) for testing and discoverying a fix for recoveryOS boot issues on AMD Ryzen 5950x CPUs.
+- Разрешение дисплея
+ - По умолчанию виртуальное разрешение установлено в1024x768, но его можно изменить, модифицировав `SupportedResolutions` в `Info.plist` драйвера `MacHyperVFramebuffer`.
+ - Смотрите issue [#6](https://github.com/Qonfused/OSX-Hyper-V/issues/6) для подробностей.
+- Аппаратное ускорение графики
+ - По умолчанию macOS работает с синтетическим графическим драйвером `MacHyperVFramebuffer`, который обеспечивает базовую графику (с8 МБ видеопамяти). Такой драйвер подходит для базовых задач, но не даёт аппаратного ускорения.
+ - Аппаратное ускорение возможно через [Discrete Device Assignment (DDA]

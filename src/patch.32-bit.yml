@@ -1,23 +1,23 @@
 ## @file
-# config.plist configuration file patches for legacy 32-bit macOS versions.
+# Файл патчей конфигурации config.plist для устаревших32-битных версий macOS.
 #
-# Copyright (c) 2021-2025, Goldfish64. All rights reserved.
-# Copyright (c) 2023-2025, Cory Bennett. All rights reserved.
+# Copyright (c)2021-2025, Goldfish64. All rights reserved.
+# Copyright (c)2023-2025, Cory Bennett. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause
 ##
 
-# This file extends the base `config.yml` patches for all macOS versions and the
-# `patch.legacy.yml` patches for legacy (10.7 and older) macOS versions.
+# Этот файл расширяет базовые патчи `config.yml` для всех версий macOS и
+# патчи `patch.legacy.yml` для устаревших (10.7 и старее) версий macOS.
 # @see https://github.com/Qonfused/HyperV-OSX/blob/main/src/config.yml
 # @see https://github.com/Qonfused/HyperV-OSX/blob/main/src/config.legacy.yml
 
 
 ################################################################################
-#                                  Kernel fixes                                #
+# Исправления ядра #
 ################################################################################
 
 Booter:
-  Quirks:
-    # Resolves FPU/SSE-related crashes in runtime services when booting 32-bit
-    # macOS versions using Hyper-V Gen2's 64-bit UEFI firmware.
-    ClearTaskSwitchBit:     Boolean | true
+ Quirks:
+ # Решает падения, связанные с FPU/SSE в runtime services при загрузке32-битных
+ # версий macOS, используя64-битную UEFI прошивку Hyper-V Gen2.
+ ClearTaskSwitchBit: Boolean | true
