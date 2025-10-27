@@ -1,40 +1,40 @@
 <h1 align="center">OSX-Hyper-V</h1>
 <p align="center">
-  <img
-    src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/graphic.png"
-    alt="Graphic of Hyper-V Window"
-    class="center"
-    width=500px
-  ><br>
-  Проект <b>Hackintosh</b>, реализующий пакет <a href="https://github.com/acidanthera/MacHyperVSupport">MacHyperVSupport</a> для <b>Windows Hyper-V</b>, построенный поверх загрузчика <a href="https://github.com/acidanthera/OpenCorePkg">OpenCore</a> и менеджера сборки <a href="https://github.com/Qonfused/OCE-Build">OCE-Build</a>.
+ <img
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/graphic.png"
+ alt="Graphic of Hyper-V Window"
+ class="center"
+ width=500px
+ ><br>
+ Проект <b>Hackintosh</b>, реализующий пакет <a href="https://github.com/acidanthera/MacHyperVSupport">MacHyperVSupport</a> для <b>Windows Hyper-V</b>, построенный поверх загрузчика <a href="https://github.com/acidanthera/OpenCorePkg">OpenCore</a> и менеджера сборки <a href="https://github.com/Qonfused/OCE-Build">OCE-Build</a>.
 </p>
 
 <div align="center">
 
-  <a href="/LICENSE">![License](https://img.shields.io/badge/⚖_License-BSD_3_Clause-lightblue?labelColor=3f4551)</a>
-  <a href="/docs/CHANGELOG.md">![SemVer](https://img.shields.io/github/v/release/Qonfused/OSX-Hyper-V?label=SemVer&logo=SemVer&labelColor=3f4551)</a>
-  <a href="">![macOS Versions](https://img.shields.io/badge/macOS%20Versions-10.4%20to%2026-important?labelColor=3f4551)</a>
-    <a href="https://github.com/acidanthera/OpenCorePkg/releases">![OpenCore](https://img.shields.io/badge/OpenCore-1.0.5-0c7dbe?logo=Osano&logoColor=0298e1&labelColor=3f4451)</a>
-  <a href="https://github.com/Qonfused/OSX-Hyper-V/actions/workflows/oce-build.yml">![OCE Build](https://github.com/Qonfused/OSX-Hyper-V/actions/workflows/oce-build.yml/badge.svg?branch=main)</a>
+ <a href="/LICENSE">![License](https://img.shields.io/badge/⚖_License-BSD_3_Clause-lightblue?labelColor=3f4551)</a>
+ <a href="/docs/CHANGELOG.md">![SemVer](https://img.shields.io/github/v/release/k13wk4/OSX-Hyper-V-AMD-RU?label=SemVer&logo=SemVer&labelColor=3f4551)</a>
+ <a href="">![macOS Versions](https://img.shields.io/badge/macOS%20Versions-10.4%20to%2026-important?labelColor=3f4551)</a>
+ <a href="https://github.com/acidanthera/OpenCorePkg/releases">![OpenCore](https://img.shields.io/badge/OpenCore-1.0.5-0c7dbe?logo=Osano&logoColor=0298e1&labelColor=3f4451)</a>
+ <a href="https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/actions/workflows/oce-build.yml">![OCE Build](https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/actions/workflows/oce-build.yml/badge.svg?branch=main)</a>
 
 </div>
 
 ## ⚡Быстрые ссылки
 
-- [Текущий прогресс](#%EF%B8%8F-current-progress)
- - [Поддержка версий macOS](#macos-version-support)
-- [Как начать](#-getting-started)
- - [1. Клонировать репозиторий через git](#1-clone-this-repository-using-git)
- - [2. Настроить OpenCore для вашего железа](#2-configure-opencore-for-your-hardware)
+- [Текущий прогресс](#текущий-прогресс)
+- [Поддержка версий macOS](#поддержка-версий-macos)
+- [Как начать](#как-начать)
+ - [1. Клонирование репозитория через Git](#1-клонирование-репозитория-через-git)
+ - [2. Настроить OpenCore для вашего железа](#2-настроить-opencore-для-вашего-железа)
  - [Intel](#intel)
  - [AMD](#amd)
- - [3. Построить этот репозиторий с помощью OCE-Build](#3-build-this-repository-using-oce-build)
- - [4. Настройка Hyper-V](#4-setting-up-hyper-v)
- - [5. Использование этого EFI с macOS](#5-using-this-efi-with-macos)
- - [6. Устранение неполадок](#6-troubleshooting)
-- [Как внести вклад](#-contributing)
-- [Лицензия](#%EF%B8%8F-license)
-- [Благодарности](#-credits)
+ - [3. Сборка репозитория с помощью OCE-Build](#3-сборка-репозитория-с-помощью-oce-build)
+ - [4. Настройка Hyper-V](#4-настройка-hyper-v)
+ - [5. Использование этого EFI с macOS](#5-использование-этого-efi-с-macos)
+ - [6. Устранение неполадок](#6-устранение-неполадок)
+- [Как внести вклад](#как-внести-вклад)
+- [Лицензия](#лицензия)
+- [Благодарности](#благодарности)
 
 ## ⚙️ Текущий прогресс
 
@@ -63,7 +63,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/_placeholder.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/_placeholder.png"
  width=25
  hspace=2
  align="top"
@@ -79,7 +79,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sequoia.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/sequoia.png"
  width=25
  hspace=2
  align="top"
@@ -95,7 +95,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sonoma.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/sonoma.png"
  width=25
  hspace=2
  align="top"
@@ -111,7 +111,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/ventura.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/ventura.png"
  width=25
  hspace=2
  align="top"
@@ -127,7 +127,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/monterey.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/monterey.png"
  width=22
  hspace=2
  align="top"
@@ -143,7 +143,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/big-sur.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/big-sur.png"
  width=25
  hspace=2
  align="top"
@@ -159,7 +159,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/catalina.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/catalina.png"
  width=25
  hspace=2
  align="top"
@@ -175,7 +175,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mojave.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/mojave.png"
  width=25
  hspace=2
  align="top"
@@ -191,7 +191,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/high-sierra.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/high-sierra.png"
  width=25
  hspace=2
  align="top"
@@ -207,7 +207,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/sierra.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/sierra.png"
  width=25
  hspace=2
  align="top"
@@ -223,7 +223,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/el-capitan.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/el-capitan.png"
  width=25
  hspace=2
  align="top"
@@ -239,7 +239,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/yosemite.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/yosemite.png"
  width=25
  hspace=2
  align="top"
@@ -255,7 +255,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mavericks.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/mavericks.png"
  width=25
  hspace=2
  align="top"
@@ -271,7 +271,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/mountain-lion.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/mountain-lion.png"
  width=25
  hspace=2
  align="top"
@@ -287,7 +287,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/lion.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/lion.png"
  width=25
  hspace=2
  align="top"
@@ -303,7 +303,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/snow-leopard.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/snow-leopard.png"
  width=25
  hspace=2
  align="top"
@@ -319,7 +319,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/leopard.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/leopard.png"
  width=25
  hspace=2
  align="top"
@@ -335,7 +335,7 @@
  <tr>
  <td>
  <img
- src="https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/macOS-roundrels/tiger.png"
+ src="https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/macOS-roundrels/tiger.png"
  width=25
  hspace=2
  align="top"
@@ -354,27 +354,32 @@
 
 ## ✨ Как начать
 
-Если вы используете один из предварительно собранных релизов из этого репозитория, вы можете перейти сразу к разделу [2. Настройка OpenCore для вашего железа](#2-configure-opencore-for-your-hardware), чтобы настроить OpenCore под ваш CPU, а затем перейти к [4. Настройка Hyper-V](#4-setting-up-hyper-v) для создания новой виртуальной машины.
+Если вы используете один из предварительно собранных релизов из этого репозитория, вы можете перейти сразу к разделу [2. Настройка OpenCore для вашего железа](#2-настроить-opencore-для-вашего-железа), чтобы настроить OpenCore под ваш CPU, а затем перейти к [4. Настройка Hyper-V](#4-настройка-hyper-v) для создания новой виртуальной машины.
 
 Те, кто желает собрать проект из исходников, могут следовать шагам ниже для клонирования репозитория, сборки EFI и настройки Hyper-V.
 
-### 1. Клонирование репозитория через Git
+###1. Клонирование репозитория через Git
 
 Чтобы клонировать репозиторий, выполните:
 ```sh
-git clone https://github.com/Qonfused/OSX-Hyper-V
-cd OSX-Hyper-V
+- git clone https://github.com/Qonfused/OSX-Hyper-V
+- cd OSX-Hyper-V
++ git clone https://github.com/k13wk4/OSX-Hyper-V-AMD-RU
++ cd OSX-Hyper-V-AMD-RU
 ```
 
 > [!TIP]
 > В качестве альтернативы можно использовать команду curl для загрузки и распаковки архива с GitHub:
 > ```pwsh
-> iwr https://github.com/Qonfused/OSX-Hyper-V/archive/refs/heads/main.zip -OutFile OSX-Hyper-V-main.zip | tar -xf OSX-Hyper-V-main.zip
-> rm OSX-Hyper-V-main.zip
-> cd OSX-Hyper-V-main
+> - iwr https://github.com/Qonfused/OSX-Hyper-V/archive/refs/heads/main.zip -OutFile OSX-Hyper-V-main.zip | tar -xf OSX-Hyper-V-main.zip
+> - rm OSX-Hyper-V-main.zip
+> - cd OSX-Hyper-V-main
+> + iwr https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/archive/refs/heads/main.zip -OutFile OSX-Hyper-V-AMD-RU-main.zip | tar -xf OSX-Hyper-V-AMD-RU-main.zip
+> + rm OSX-Hyper-V-AMD-RU-main.zip
+> + cd OSX-Hyper-V-AMD-RU-main
 > ```
 
-### 2. Настроить OpenCore для вашего железа
+###2. Настроить OpenCore для вашего железа
 
 > [!NOTE]
 > **MacHyperVSupport** требует Windows Server2012 R2 / Windows8.1 или новее. Windows Server2016 в настоящее время не поддерживается.
@@ -384,7 +389,7 @@ cd OSX-Hyper-V
 По умолчанию нет аппаратного ускорения GPU, поэтому все графические задачи будут выполняться CPU и будут медленными. Для получения аппаратного ускорения нужно использовать Discrete Device Assignment (DDA) для проброса поддерживаемой видеокарты.
 
 > [!IMPORTANT]
-> В отличие от bare metal, iGPU/APU по умолчанию невидимы для VM и требуют поддержки DDA для проброса GPU. Кроме того, большинство дискретных GPU, даже если они нативно поддерживаются, могут не работать при пробросе через DDA. Смотрите раздел с [ограничениями](https://github.com/Qonfused/OSX-Hyper-V?tab=readme-ov-file#limitations) для обзора текущей поддержки в Hyper-V.
+> В отличие от bare metal, iGPU/APU по умолчанию невидимы для VM и требуют поддержки DDA для проброса GPU. Кроме того, большинство дискретных GPU, даже если они нативно поддерживаются, могут не работать при пробросе через DDA. Смотрите раздел с [ограничениями](https://github.com/k13wk4/OSX-Hyper-V-AMD-RU?tab=readme-ov-file#limitations) для обзора текущей поддержки в Hyper-V.
 
 Для общего обзора поддержки оборудования обратитесь к разделам [Поддержка CPU](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#cpu-support) и [Поддержка GPU](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html#gpu-support) руководства Dortania для разбора поддержки аппаратуры по версиям macOS.
 
@@ -554,7 +559,7 @@ Kernel:
 > [!NOTE]
 > При применении AMD патчей ядра выбирайте количество ядер, соответствующее числу ядер, выделенных виртуальной машине при конфигурации CPU (т.е. патчи `algrey - Force cpuid_cores_per_package`).
 >
-> Например, для6-ядерного AMD Ryzen9600X рекомендуется выделить6 ядер VM и использовать `06` для патча `cpuid_cores_per_package`. Если возникают проблемы при загрузке с6 ядрами, попробуйте выделить8 ядер и использовать `08` для патча (см. [#37](https://github.com/Qonfused/OSX-Hyper-V/issues/37)).
+> Например, для6-ядерного AMD Ryzen9600X рекомендуется выделить6 ядер VM и использовать `06` для патча `cpuid_cores_per_package`. Если возникают проблемы при загрузке с6 ядрами, попробуйте выделить8 ядер и использовать `08` для патча (см. [#37](https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/issues/37)).
 
 > [!TIP]
 > Вы можете использовать скрипт `amd.ps1` для автоматической генерации AMD патчей для вашего CPU, выполнив:
@@ -564,7 +569,7 @@ Kernel:
 >
 > Обратите внимание, что требуется опция `--cpu`, указанная как количество ядер, выделенных VM.
 
-### 3. Сборка репозитория с помощью OCE-Build
+###3. Сборка репозитория с помощью OCE-Build
 
 Этот проект использует [OCE-Build](https://github.com/Qonfused/OCE-Build) для автоматического версионирования и сборки EFI этого репозитория.
 
@@ -588,7 +593,7 @@ Kernel:
 
 Это создаст новую директорию `dist/` с виртуальным диском `EFI.vhdx` и директорией `dist/Scripts/`, содержащей скрипты для создания и настройки виртуальной машины.
 
-### 4. Настройка Hyper-V
+###4. Настройка Hyper-V
 
 Сначала убедитесь, что вы [включили Hyper-V](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) перед продолжением.
 - Вы можете включить роль Hyper-V выполнив команду в PowerShell от имени администратора:
@@ -634,11 +639,11 @@ Kernel:
 
 Отформатируйте небольшой (1 ГБ) диск в FAT32 и инициализируйте как GPT. Смонтируйте диск — он будет служить загрузочным разделом для вашей VM и будет содержать папку OpenCore EFI.
 - Выберите один из трёх способов создания VHD/VHDX:
- - (A) Hyper-V Manager - Перейдите в `Action > New > Hard Disk`. <br>![A-VHD](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/A-VHD.png)
+ - (A) Hyper-V Manager - Перейдите в `Action > New > Hard Disk`. <br>![A-VHD](https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/README/A-VHD.png)
  - Файлы виртуальных дисков находятся в `C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\`.
  - Смонтировать VHD/VHDX можно правой кнопкой по файлу -> `Mount`.
  - Отмонтировать — `Eject`.
- - (B) Disk Management - Перейдите в `Action > Create VHD`. <br>![B-VHD](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/B-VHD.png)
+ - (B) Disk Management - Перейдите в `Action > Create VHD`. <br>![B-VHD](https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/README/B-VHD.png)
  - Инициализируйте диск как GPT и создайте новый раздел FAT32.
  - Смонтировать VHD/VHDX: `Action > Attach VHD`.
  - Отмонтировать: правой кнопкой по тому же тому -> `Detach VHD`.
@@ -689,7 +694,7 @@ Kernel:
 
 В Hyper-V Manager выберите `Action > New > Virtual Machine`.
 
-![3-New-VM](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/3-New-VM.png)
+![3-New-VM](https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/README/3-New-VM.png)
 
 При создании укажите следующие параметры:
 - **Specify Generation**: Выберите `Generation2`.
@@ -699,7 +704,7 @@ Kernel:
 
 После создания правой кнопкой по VM -> `Settings`.
 
-![3-VM-Settings](https://raw.githubusercontent.com/Qonfused/OSX-Hyper-V/main/docs/assets/README/3-VM-Settings.png)
+![3-VM-Settings](https://raw.githubusercontent.com/k13wk4/OSX-Hyper-V-AMD-RU/main/docs/assets/README/3-VM-Settings.png)
 
 Затем настройте следующие опции в разделе Hardware:
 - Перейдите в `Security` и отключите `Enable Secure Boot`.
@@ -708,7 +713,7 @@ Kernel:
 
 ---
 
-### 5. Использование этого EFI с macOS
+###5. Использование этого EFI с macOS
 
 Смотрите раздел [Процесс установки][Dortania-Guide/Installation-Process] руководства Dortania. Дополнительные пост-инсталляционные шаги приведены для удобства с Hyper-V (или особенностей проекта).
 
@@ -725,25 +730,25 @@ Kernel:
 9. В главном меню Recovery выбрать "Reinstall macOS"
 10. Выбрать только что созданный AFPS-диск
 11. Дождаться установки (~2 часа).
-  -->
+ -->
 
 Краткое описание процесса установки:
 
 1. Запустите виртуальную машину и выберите `EFI (dmg)` в меню загрузчика OpenCore.
-   - Если вы создали отдельный VHDX установщика macOS, он может отображаться как `macOS Base System (External)` или `Install macOS Big Sur (External)` в зависимости от версии.
+ - Если вы создали отдельный VHDX установщика macOS, он может отображаться как `macOS Base System (External)` или `Install macOS Big Sur (External)` в зависимости от версии.
 2. Когда загрузится установщик, откройте Disk Utility через меню Utilities.
-   - Выберите `Msft Virtual Disk Media` (ваш основной виртуальный диск) и нажмите `Erase` для форматирования.
-     - Дайте диску имя (например, `macOS` или `Macintosh HD`).
-     - Для macOS10.13 и новее используйте `APFS`. Для старых версий используйте `Mac OS Extended (Journaled)`.
+ - Выберите `Msft Virtual Disk Media` (ваш основной виртуальный диск) и нажмите `Erase` для форматирования.
+ - Дайте диску имя (например, `macOS` или `Macintosh HD`).
+ - Для macOS10.13 и новее используйте `APFS`. Для старых версий используйте `Mac OS Extended (Journaled)`.
 4. Выйдите из Disk Utility и вернитесь в главное меню установщика.
 5. Выберите `Reinstall macOS` и следуйте подсказкам для установки на отформатированный диск.
-   - Убедитесь, что выбрали правильный диск для установки (тот, который вы только что отформатировали).
-   - Установка может занять значительное время (30 минут —2 часа).
+ - Убедитесь, что выбрали правильный диск для установки (тот, который вы только что отформатировали).
+ - Установка может занять значительное время (30 минут —2 часа).
 6. После завершения установки виртуальная машина перезагрузится и вы увидите меню OpenCore.
-   - Может потребоваться несколько перезагрузок для завершения установки.
+ - Может потребоваться несколько перезагрузок для завершения установки.
 7. Выберите установленный диск (или имя, которое вы задали) для загрузки macOS.
-   - Если загрузка не проходит, возможно, придётся снова выбрать диск установщика.
-   - Можно сделать запись загрузки по умолчанию, удерживая `Ctrl` при выборе диска.
+ - Если загрузка не проходит, возможно, придётся снова выбрать диск установщика.
+ - Можно сделать запись загрузки по умолчанию, удерживая `Ctrl` при выборе диска.
 
 Виртуальный EFI диск, создаваемый этим проектом, включает пост-инсталляционный скрипт, который устанавливает драйвер `MacHyperVFramebuffer` и настраивает демоны для дополнительной поддержки сервисов Hyper-V. Это требуется для поддержки изменения разрешения и аппаратного курсора в macOS.
 
@@ -763,25 +768,25 @@ bash ./Scripts/optimize-vm.sh
 
 [Dortania-Guide/Installation-Process]: https://dortania.github.io/OpenCore-Install-Guide/installation/installation-process.html
 
-### 6. Устранение неполадок
+###6. Устранение неполадок
 
-Если вы столкнулись с проблемами во время установки или загрузки, можете [создать issue на GitHub](https://github.com/Qonfused/OSX-Hyper-V/issues/new) и привести как можно больше деталей о вашей конфигурации, включая:
+Если вы столкнулись с проблемами во время установки или загрузки, можете [создать issue на GitHub](https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/issues/new) и привести как можно больше деталей о вашей конфигурации, включая:
 - Версию macOS, которую вы пытаетесь установить.
 - Версию Windows, на которой работает Hyper-V.
 - Ваш CPU (например, Intel i7-9700K, AMD Ryzen53600 и т.д.).
 - Число выделенных ядер и объём ОЗУ для виртуальной машины.
-- Любые сообщения об ошибках, появляющиеся в меню OpenCore или во время установки.
+- Любые сообщения об ошибках, appearing в меню OpenCore или во время установки.
 
 Ниже перечислены распространённые проблемы и возможные решения:
 - Ранний перезапуск после выбора установщика (`#[EB.MM.AKM|!] Err(0xE) <- EB.MM.MKP`)
  - Обычно это означает, что установщику macOS не хватает памяти для загрузки. Убедитесь, что выделено как минимум6-8 ГБ ОЗУ для macOS11 Big Sur и новее, или4 ГБ для старых версий.
- - Смотрите [#44](https://github.com/Qonfused/OSX-Hyper-V/issues/44) для подробностей.
+ - Смотрите [#44](https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/issues/44) для подробностей.
 - Зависание на `vm_shared_region_start_address()` или `failed lookup: com.apple.dock.fullscreen`:
  - Задержки в этой области обычно означают, что GUI установщика macOS не смог запуститься. Могут появляться и другие сообщения, связанные с `WindowServer` или `gui/0`, запрашивающие службы (например `logd` или `recoveryosd`).
  - Попробуйте перезапустить и сбросить NVRAM (опция `Reset NVRAM` в меню OpenCore), чтобы проверить, решит ли это проблему.
- - Хороший обходной путь — установить macOS Catalina (10.15), а затем обновиться до нужной версии после установки. См. [#53](https://github.com/Qonfused/OSX-Hyper-V/issues/53#issuecomment-3089641792).
+ - Хороший обходной путь — установить macOS Catalina (10.15), а затем обновиться до нужной версии после установки. См. [#53](https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/issues/53#issuecomment-3089641792).
 - Перезагрузка после установки при выборе установщика.
- - Это относительно нормальное поведение. Может потребоваться несколько перезагрузок (с выбором установщика каждый раз) для завершения установки.
+ - Это relativamente нормальное поведение. Может потребоваться несколько перезагрузок (с выбором установщика каждый раз) для завершения установки.
 
 #### Ограничения
 
@@ -789,7 +794,6 @@ bash ./Scripts/optimize-vm.sh
 
 - Разрешение дисплея
  - По умолчанию виртуальное разрешение установлено в1024x768, но его можно изменить, модифицировав `SupportedResolutions` в `Info.plist` драйвера `MacHyperVFramebuffer`.
- - Смотрите issue [#6](https://github.com/Qonfused/OSX-Hyper-V/issues/6) для подробностей.
+ - Смотрите issue [#6](https://github.com/k13wk4/OSX-Hyper-V-AMD-RU/issues/6) для подробностей.
 - Аппаратное ускорение графики
  - По умолчанию macOS работает с синтетическим графическим драйвером `MacHyperVFramebuffer`, который обеспечивает базовую графику (с8 МБ видеопамяти). Такой драйвер подходит для базовых задач, но не даёт аппаратного ускорения.
- - Аппаратное ускорение возможно через [Discrete Device Assignment (DDA]
