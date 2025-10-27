@@ -1,0 +1,310 @@
+## @file
+# config.plist configuration file patches for running macOS on Hyper-V
+#
+# Copyright (c) 2021-2025, Goldfish64. All rights reserved.
+# Copyright (c) 2023-2025, Cory Bennett. All rights reserved.
+# SPDX-License-Identifier: BSD-3-Clause
+##
+
+# This file builds on the existing defaults from OCE-Build and MacHyperVSupport.
+# @see https://github.com/Qonfused/OCE-Build/blob/main/docs/resources/base-config.yml
+# @see https://github.com/acidanthera/MacHyperVSupport/blob/master/README.md
+
+# Refer to the below resources for more information on sensible defaults:
+# - https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf
+#   (or https://dortania.github.io/docs/latest/Configuration.html)
+
+#region: Base Configuration - Keep in sync with docs/resources/base-config.yml
+
+################################################################################
+#                             Misc. Cosmetic fixes                             #
+################################################################################
+
+# Remove warning comments
+@delete('#WARNING - 1', '#WARNING - 2', '#WARNING - 3', '#WARNING - 4')
+# Remove redundant comment
+@delete('NVRAM.Add.7C436110-AB2A-4BBB-A880-FE41995C9F82.#INFO (prev-lang:kbd)')
+
+@ifdef(RELEASE)
+# Use default GoldenGate theme with OpenCanopy.
+# - https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html
+Misc:
+  Boot:
+    PickerMode:                       String  | "External"
+    PickerVariant:                    String  | "Acidanthera\GoldenGate"
+@endif
+
+# Changes default macOS installer/keyboard language to English.
+# - You can find a list of supported languages below (convert HEX -> ASCI):
+#   https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt
+NVRAM:
+  Add:
+    7C436110-AB2A-4BBB-A880-FE41995C9F82:
+      prev-lang:kbd:                  String  | "en-US:0"
+
+################################################################################
+#                           Platform (SMBIOS) fixes                            #
+################################################################################
+
+# Required for macOS Tahoe as iMac19,1 (2019, Coffee Lake+) were dropped.
+PlatformInfo:
+  Generic:
+    SystemProductName:     String  | "iMac20,1"
+
+# Prevents SMBIOS injection into non-Apple operating systems.
+#
+# This approach with UpdateSMBIOSMode relegates SMBIOS updates to macOS to avoid
+# colliding with OEM Windows license activation and other custom OEM software.
+#
+# This works by writing SMBIOS information to another area of the SMBIOS table
+# not read by Windows and instead patching macOS's AppleSmbios.kext to read from
+# the new location. The original SMBIOS information area is left untouched.
+#
+# - Note1: All ACPI injections, patches, deletions are still applied by OpenCore
+#          when using this method. To prevent any ACPI manipulation from being
+#          applied, it is better to boot into the Windows Boot Manager instead.
+#
+# - Note2: OEM Windows license activation is only problematic with SMBIOS
+#          injection for licenses with no Windows accounts tied to them.
+#
+# - Note3: This has a side-effect of breaking Bootcamp compatibility on Windows.
+#          You can restore this functionality (at the cost of breaking OEM
+#          software on hackintoshes) by using the below OpenCore defaults:
+#
+#              Kernel.Quirks.CustomSMBIOSGuid: Boolean | false
+#              PlatformInfo.UpdateSMBIOSMode:  String  | "Create"
+Kernel:
+  Quirks:
+    CustomSMBIOSGuid:                 Boolean | true
+PlatformInfo:
+  UpdateSMBIOSMode:                   String  | "Custom"
+
+################################################################################
+
+@ifdef(DEBUG)
+# Debugging quirks (recommended with DEBUG version of OpenCore)
+# - https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/debug.html
+# - https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/kernel-debugging.html#nvram
+Kernel:
+  Quirks:
+    PanicNoKextDump:                  Boolean | true
+    PowerTimeoutKernelPanic:          Boolean | true
+Misc:
+  Debug:
+    AppleDebug:                       Boolean | true
+    ApplePanic:                       Boolean | true
+    DisableWatchDog:                  Boolean | true
+    Target:                           Number  | 67
+NVRAM:
+  Add:
+    7C436110-AB2A-4BBB-A880-FE41995C9F82:
+      # Breakdown of used boot args:
+      # `-v`              (verbose mode)
+      # `debug=0x100`     (debug mask; disables watchdog to avoid panic reboot)
+      # `keepsyms=1`      (show panic log debug symbols)
+      # `msgbuf=1048576`  (Resizes kernel msg buffer to 1 MB; avoids truncation)
+      boot-args:                      String  | "-v debug=0x100 keepsyms=1 msgbuf=1048576"
+@endif
+
+################################################################################
+#                            Cosmetic Plist Fixes                              #
+################################################################################
+
+# Clear default entries from Sample.plist
+ACPI:
+  @override
+  Delete:                             Array   | []
+Booter:
+  @override
+  MmioWhitelist:                      Array   | []
+  @override
+  Patch:                              Array   | []
+Kernel:
+  @override
+  Block:                              Array   | []
+  @override
+  Force:                              Array   | []
+  @override
+  Patch:                              Array   | []
+Misc:
+  @override
+  Entries:                            Array   | []
+UEFI:
+  @override
+  ReservedMemory:                     Array   | []
+
+#endregion
+
+################################################################################
+#                               ACPI related fixes                             #
+################################################################################
+
+ACPI:
+  @override
+  Patch:
+    # Companion to SSDT-HV-VMBUS
+    - Base:                 String  | "_SB.VMOD"
+      Comment:              String  | "_HID to XHID rename (Hyper-V VMOD)"
+      Count:                Number  | 1
+      Find:                 Data    | <5F484944>
+      Replace:              Data    | <58484944>
+      TableSignature:       Data    | <44534454>
+    - Base:                 String  | "_SB.VMOD.VMBS"
+      Comment:              String  | "_HID to XHID rename (Hyper-V VMBus)"
+      Count:                Number  | 1
+      Find:                 Data    | <5F484944>
+      Replace:              Data    | <58484944>
+      TableSignature:       Data    | <44534454>
+    # Companion to SSDT-HV-DEV
+    - Base:                 String  | "_SB.VMOD.TPM2"
+      Comment:              String  | "_STA to XSTA rename (Hyper-V TPM)"
+      Count:                Number  | 1
+      Find:                 Data    | <5F535441>
+      Replace:              Data    | <58535441>
+      TableSignature:       Data    | <44534454>
+    - Base:                 String  | "_SB.NVDR"
+      Comment:              String  | "_STA to XSTA rename (Hyper-V NVDIMM)"
+      Count:                Number  | 1
+      Find:                 Data    | <5F535441>
+      Replace:              Data    | <58535441>
+      TableSignature:       Data    | <44534454>
+    - Base:                 String  | "_SB.EPC"
+      Comment:              String  | "_STA to XSTA rename (Hyper-V EPC)"
+      Count:                Number  | 1
+      Find:                 Data    | <5F535441>
+      Replace:              Data    | <58535441>
+      TableSignature:       Data    | <44534454>
+    - Base:                 String  | "_SB.VMOD.BAT1"
+      Comment:              String  | "_STA to XSTA rename (Hyper-V battery)"
+      Count:                Number  | 1
+      Find:                 Data    | <5F535441>
+      Replace:              Data    | <58535441>
+      TableSignature:       Data    | <44534454>
+
+################################################################################
+#                           BIOS/firmware related fixes                        #
+################################################################################
+
+Booter:
+  Quirks:
+    AvoidRuntimeDefrag:     Boolean | true
+    ProvideCustomSlide:     Boolean | true
+
+################################################################################
+#                                  Boot fixes                                  #
+################################################################################
+
+Kernel:
+  Quirks:
+    # Provides the correct TSC and FSB values to the kernel, as well as disables
+    # CPU topology validation (10.8+)
+    ProvideCurrentCpuInfo:  Boolean | true
+
+UEFI:
+  APFS:
+    # Disables minimum APFS version for macOS Catalina and earlier boot entries.
+    MinDate:                Number  | -1
+    MinVersion:             Number  | -1
+  Output:
+    # Sets proper display scaling for boot picker + debug logging.
+    UIScale:                Number  | -1
+  Quirks:
+    # Required on Windows Server 2019 / Windows 10 and newer
+    DisableSecurityPolicy:  Boolean | true
+
+################################################################################
+#                                 Graphics Fixes                               #
+################################################################################
+
+Kernel:
+  Add:
+    # Overrides the Kernel.Add entry for MacHyperVFramebuffer.
+    @override(BundlePath)
+    - BundlePath:           String  | "MacHyperVFramebuffer.kext"
+      Comment:              String  | "Must be installed to /Library/Extensions or /System/Library/Extensions for full functionality."
+      Enabled:              Boolean | false
+  Force:
+    # Required when loading MacHyperVFramebuffer from /Library/Extensions.
+    # - If loading from /Library/Extensions in macOS 11 (Big Sur) and newer, 
+    #   kext signing must be disabled. Use `csr-active-config` to set this.
+    # - If loaded from /System/Library/Extensions, this patch is not required,
+    #   but SIP (filesystem protections and kext signing) must be disabled.
+    - Arch:                 String  | "Any"
+      BundlePath:           String  | "System/Library/Extensions/IOGraphicsFamily.kext"
+      ExecutablePath:       String  | "IOGraphicsFamily"
+      Identifier:           String  | "com.apple.iokit.IOGraphicsFamily"
+      PlistPath:            String  | "Info.plist"
+      Enabled:              Boolean | false
+
+################################################################################
+#                             Security related fixes                           #
+################################################################################
+
+Misc:
+  Security:
+    # Allows setting a default boot entries when holding the CTRL key.
+    AllowSetDefault:        Boolean | true
+    # Allows all bootable parition types to show in the boot picker.
+    # - https://dortania.github.io/OpenCore-Post-Install/universal/security/scanpolicy.html
+    ScanPolicy:             Number  | 0
+    # Apple Secure Boot hardware model and policy
+    # - Possible values include:
+    #   - Disabled: No model, Secure Boot will be disabled.
+    #   - Default: Currently set to x86legacy
+    # - @see https://dortania.github.io/OpenCore-Post-Install/universal/security/applesecureboot.html#securebootmodel
+    SecureBootModel:        String  | "Disabled"
+    # OpenCore vaulting configuration (optional=no vault enforced, insecure)
+    # - @see https://dortania.github.io/OpenCore-Post-Install/universal/security/vault.html
+    Vault:                  String  | "Optional"
+NVRAM:
+  Add:
+    7C436110-AB2A-4BBB-A880-FE41995C9F82:
+      # Enables System Integrity Protection (SIP) setting in macOS.
+      #
+      # By default, we disable kext signing (0x1) for MacHyperVFramebuffer;
+      # required for macOS 11 (Big Sur) and newer.
+      #
+      # - Possible values include:
+      #   - 00000000: Default (enabled)
+      #   - 01000000: Disables Kext signing
+      #   - 02000000: Disables filesystem protections
+      #   - 03000000: Disables both Kext signing and filesystem protections
+      #   - 67000000: Disables all SIP protections
+      #   - FF030000: Disables all flags in macOS High Sierra
+      #   - FF070000: Disables all flags in macOS Mojave and macOS Catalina
+      #   - FF0F0000: Disables all flags in macOS Big Sur
+      # - @see https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/extended/post-issues.html#disabling-sip
+      csr-active-config:    Data    | <03000000>
+NVRAM:
+  Delete:
+    7C436110-AB2A-4BBB-A880-FE41995C9F82:
+      # Overrides the default SIP setting in macOS.
+      - csr-active-config
+
+################################################################################
+#                             VMApple/2 iCloud Fixes                           #
+################################################################################
+
+# Workaround for macOS 15 VM detection
+# - This patches the hv_vmm_present value to bypass new VMApple additions
+#   added in Sequoia (often breaking iCloud services).
+# - Tested on macOS 14 (Sonoma, 23.0.0+) and macOS 15 (Sequoia, 24.0.0+).
+# - You can verify that this patch works by running the below command and
+#   checking that it's output is zero:
+#      sysctl kern | grep 'kern.hv_vmm_present'
+#   For example:
+#      kern.hv_vmm_present: 0
+Kernel:
+  Patch:
+    - Arch:                 String  | "x86_64"
+      Comment:              string  | "Patch kern.hv_vmm_present=0 (macOS 11+)"
+      Identifier:           String  | "kernel"
+      Find:                 Data    | <68696265726E61746568696472656164790068696265726E617465636F756E7400>
+      MinKernel:            String  | "20.4.0"
+      Replace:              Data    | <68696265726E61746568696472656164790068765F766D6D5F70726573656E7400>
+    - Arch:                 String  | "x86_64"
+      Comment:              string  | "Patch kern.hv_vmm_present=0 (macOS 13+)"
+      Identifier:           String  | "kernel"
+      Find:                 Data    | <626F6F742073657373696F6E20555549440068765F766D6D5F70726573656E7400>
+      MinKernel:            String  | "22.0.0"
+      Replace:              Data    | <626F6F742073657373696F6E20555549440068696265726E617465636F756E7400>

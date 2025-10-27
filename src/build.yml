@@ -1,0 +1,40 @@
+---
+version: latest
+build: DEBUG
+target: X64
+---
+ACPI:
+  SSDT-HV-DEV: "ACPI/SSDT-HV-DEV.dsl"
+  SSDT-HV-VMBUS: "ACPI/SSDT-HV-VMBUS.dsl"
+  # This SSDT must be loaded after SSDT-HV-DEV
+  SSDT-HV-PLUG: "ACPI/SSDT-HV-PLUG.dsl"
+Drivers:
+  - HfsPlus
+@ifdef(RELEASE)
+  - OpenCanopy
+@endif
+  - OpenPartitionDxe
+  - OpenRuntime
+  - ResetNvramEntry
+Kexts:
+  Lilu: latest
+  VirtualSMC: latest
+  # Core Hyper-V support kext for macOS 12.0 and newer.
+  MacHyperVSupportMonterey:
+    specifier: "*"
+    properties:
+      MinKernel: "21.0.0"
+  # Core Hyper-V support kext for macOS 10.4 to 11.0.
+  MacHyperVSupport:
+    specifier: latest
+    properties:
+      MaxKernel: "20.99.99"
+  # Synthetic Graphics Driver (for Gen2 VMs)
+  # - This kext is disabled by default as it cannot be injected by OpenCore.
+  # - Requires installing in /Library/Extensions (or /System/Library/Extensions)
+  #   with kext signing disabled in SIP on macOS 11 (Big Sur) and newer.
+  MacHyperVFramebuffer:
+    specifier: "*"
+Tools:
+  # Also known as UEFIShell
+  - OpenShell
